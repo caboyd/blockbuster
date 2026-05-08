@@ -15,9 +15,12 @@ var last_hovered: Block = null
 var tick_timer := 0.0
 var tick_interval := 1.0
 
+var cell_size: int:
+	get: return block_size + block_padding
+
 func _ready() -> void:
 	init_from_level_data(level_01)
-	block_size = block_size + block_padding
+
 	# Center the block grid
 	var screen_center = get_viewport_rect().size * 0.5
 	var grid_center = get_grid_origin()
@@ -69,18 +72,15 @@ func clear_grid():
 	grid.clear()
 		
 func get_grid_size() -> Vector2:
-	var cell_size = block_size + block_padding
 	return Vector2(width, height) * cell_size
 
 func get_grid_origin() -> Vector2:
 	return get_grid_size() * 0.5
 
 func grid_to_world(x: int, y: int) -> Vector2:
-	var cell_size = block_size + block_padding
-	return Vector2(x + 0.5, y + 0.5) * cell_size
+	return Vector2(x, y) * cell_size
 	
 func world_to_grid(pos: Vector2) -> Vector2i:
-	var cell_size = block_size + block_padding
 	var local = pos - global_position
 	return Vector2i(
 		floor(local.x / cell_size),
