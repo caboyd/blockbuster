@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://clugp4k37kcgi"]
+
+[ext_resource type="Script" uid="uid://lvpa3r6tgwhx" path="res://entities/block/block.gd" id="1_ged6v"]
+[ext_resource type="Shader" uid="uid://6nfpf8455e3d" path="res://entities/block/block.gdshader" id="2_p6luf"]
+[ext_resource type="Texture2D" uid="uid://b6hnxksinpm1r" path="res://assets/textures/block_visual_gradient.tres" id="3_wy03r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cgrg5"]
+shader = ExtResource("2_p6luf")
+shader_parameter/radius = 0.1
+shader_parameter/thickness = 0.02
+shader_parameter/border_mode = false
+shader_parameter/visible_percent = 1.0
+shader_parameter/cutoff_softness = 0.02
+
+[sub_resource type="Gradient" id="Gradient_cgrg5"]
+colors = PackedColorArray(0.11119685, 0.11119684, 0.11119684, 1, 0.18359044, 0.18359044, 0.18359044, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4kun4"]
+gradient = SubResource("Gradient_cgrg5")
+width = 128
+height = 128
+fill_from = Vector2(1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ojgcc"]
+shader = ExtResource("2_p6luf")
+shader_parameter/radius = 0.1
+shader_parameter/thickness = 0.02
+shader_parameter/border_mode = true
+shader_parameter/visible_percent = 1.0
+shader_parameter/cutoff_softness = 0.010000000475
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ged6v"]
+shader = ExtResource("2_p6luf")
+shader_parameter/radius = 0.1
+shader_parameter/thickness = 0.02
+shader_parameter/border_mode = false
+shader_parameter/visible_percent = 1.0
+shader_parameter/cutoff_softness = 0.010000000475
+
+[sub_resource type="LabelSettings" id="LabelSettings_1bw7o"]
+font_color = Color(0.9264395, 0.92748, 0.95375437, 1)
+outline_size = 3
+outline_color = Color(0.23392546, 0.23392546, 0.2339254, 1)
+
+[node name="Block" type="Node2D" unique_id=29488275]
+script = ExtResource("1_ged6v")
+shake_strength = 2.0
+shake_count = 5
+shake_time = 0.015
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=722632731]
+z_index = -1
+material = SubResource("ShaderMaterial_cgrg5")
+scale = Vector2(0.25, 0.25)
+texture = SubResource("GradientTexture2D_4kun4")
+centered = false
+region_rect = Rect2(256, 128, 128, 128)
+
+[node name="BlockCenter" type="Node2D" parent="." unique_id=1496433618]
+position = Vector2(15.5, 15)
+
+[node name="Visual" type="Sprite2D" parent="BlockCenter" unique_id=653550674]
+material = SubResource("ShaderMaterial_ojgcc")
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_wy03r")
+region_rect = Rect2(256, 128, 128, 128)
+
+[node name="HealthBar" type="Sprite2D" parent="BlockCenter" unique_id=2127930741]
+material = SubResource("ShaderMaterial_ged6v")
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_wy03r")
+
+[node name="TierLabel" type="Label" parent="BlockCenter" unique_id=1107944433]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_1bw7o")
+horizontal_alignment = 1
+vertical_alignment = 1

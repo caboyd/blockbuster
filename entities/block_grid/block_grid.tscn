@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cg170kl0x2xev"]
+
+[ext_resource type="Script" uid="uid://dyp15w2y076im" path="res://entities/block_grid/block_grid.gd" id="1_7ue27"]
+[ext_resource type="PackedScene" uid="uid://clugp4k37kcgi" path="res://entities/block/block.tscn" id="2_je26o"]
+
+[node name="BlockGrid" type="Node2D" unique_id=1501093174]
+script = ExtResource("1_7ue27")
+block_scene = ExtResource("2_je26o")
