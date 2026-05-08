@@ -2,6 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://d3nk5w85mllxy" path="res://scenes/background.gdshader" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://cg170kl0x2xev" path="res://entities/block_grid/block_grid.tscn" id="2_0wfyh"]
+[ext_resource type="Script" uid="uid://o6b8v62731h" path="res://scenes/background.gd" id="3_sugp2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sugp2"]
 shader = ExtResource("1_0wfyh")
@@ -13,8 +14,17 @@ shader_parameter/color_b = Color(0.62352943, 0.62352943, 0.6627451, 1)
 
 [node name="Node2D" type="Node2D" unique_id=1364622541]
 
-[node name="Background" type="ColorRect" parent="." unique_id=465371113]
-z_index = -1
+[node name="Camera2D" type="Camera2D" parent="." unique_id=281213421]
+anchor_mode = 0
+
+[node name="BlockGrid" parent="." unique_id=1501093174 instance=ExtResource("2_0wfyh")]
+block_size = 64
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=22264067]
+layer = -1
+
+[node name="Background" type="ColorRect" parent="CanvasLayer" unique_id=465371113]
+z_index = -3
 material = SubResource("ShaderMaterial_sugp2")
 custom_minimum_size = Vector2(1280, 720)
 anchors_preset = 15
@@ -25,9 +35,7 @@ offset_bottom = 2880.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.25, 0.25)
+size_flags_horizontal = 3
+size_flags_vertical = 3
 mouse_filter = 2
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=281213421]
-anchor_mode = 0
-
-[node name="BlockGrid" parent="." unique_id=1501093174 instance=ExtResource("2_0wfyh")]
+script = ExtResource("3_sugp2")

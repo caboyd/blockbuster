@@ -19,6 +19,14 @@ config/icon="res://assets/textures/icon.svg"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
+[gui]
+
+theme/default_font_multichannel_signed_distance_field=true
+fonts/stretch/aspect="expand"
+fonts/stretch/mode="canvas_items"
 
 [physics]
 

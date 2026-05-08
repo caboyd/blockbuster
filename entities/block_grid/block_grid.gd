@@ -22,12 +22,17 @@ func _ready() -> void:
 	init_from_level_data(level_01)
 
 	# Center the block grid
-	var screen_center = get_viewport_rect().size * 0.5
-	var grid_center = get_grid_origin()
-
-	position = screen_center - grid_center
+	get_viewport().size_changed.connect(center_grid)
+	center_grid()
 	
-
+func center_grid() -> void:
+	# Use get_visible_rect() for the most accurate "real" screen space
+	var screen_size = get_viewport_rect().size
+	var grid_size = get_grid_size()
+	
+	# Calculate the top-left position to place the grid in the middle
+	position = (screen_size * 0.5) - (grid_size * 0.5)
+	
 func _process(delta):
 	tick_timer += delta
 	if tick_timer < tick_interval:
@@ -61,6 +66,8 @@ func create_block(level:LevelData, x: int, y: int) -> Block:
 	block.init(x,y, level.get_cell(x,y), self)
 	add_child(block)
 	block.position = grid_to_world(x, y)
+	var scale: float = float(block_size / 32);
+	block.scale = Vector2(scale, scale)
 	if block.max_health == 0:
 		block.visible = false;
 	return block
